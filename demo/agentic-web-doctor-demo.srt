@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:19,512
+Agentic Web Doctor — Self-Auditing Open Agentic Website (MVP 0.3 · 100/100)
+
+2
+00:00:19,962 --> 00:00:32,754
+Live CORS Audit: Cognizant Little Oven Pizza Example (100/100 PASS)
+
+3
+00:00:33,204 --> 00:00:47,364
+One-Click Scaffold Generator: Downloadable agent-manifest.json & .network.json
+
+4
+00:00:47,814 --> 00:01:03,294
+Dual-Mode Runtime: Zero-Key Local Engine + Browser-Local BYOK Sovereignty

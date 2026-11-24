@@ -6,3 +6,6 @@ __pycache__/
 *keypair*.json
 .DS_Store
 Thumbs.db
+demo/*.mp4
+demo/*.webm
+
