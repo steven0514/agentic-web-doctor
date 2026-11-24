@@ -1,0 +1,74 @@
+{
+  "protocol": "nsdeploy-agent-mcp/v1",
+  "name": "agentic-web-doctor-mcp",
+  "version": "1.0.0",
+  "network": "agentic_web_doctor",
+  "front_man": "doctor_coordinator",
+  "transport": "webmcp-browser-local",
+  "tools": [
+    {
+      "name": "audit_agentic_site",
+      "description": "Run a 10-point Open Agentic Web MVP Profile 0.3 conformance audit on a manifest + network JSON pair.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "manifest": {
+            "type": "object",
+            "description": "Parsed agent-manifest.json object"
+          },
+          "network": {
+            "type": "object",
+            "description": "Optional parsed resolved .network.json object"
+          }
+        },
+        "required": [
+          "manifest"
+        ]
+      }
+    },
+    {
+      "name": "inspect_security_gate",
+      "description": "Audit trust boundaries, peer_policy, hardcoded credential leaks, and execution limits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "manifest": {
+            "type": "object"
+          },
+          "network": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "manifest"
+        ]
+      }
+    },
+    {
+      "name": "generate_agentic_scaffold",
+      "description": "Generate a compliant MVP 0.3 agent-manifest.json and network.json scaffold for a given site name and category.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "type": "string",
+            "description": "Website or product brand name"
+          },
+          "domainType": {
+            "type": "string",
+            "enum": [
+              "saas-docs",
+              "ecommerce",
+              "opensource-project",
+              "local-service"
+            ]
+          }
+        },
+        "required": [
+          "brand",
+          "domainType"
+        ]
+      }
+    }
+  ]
+}

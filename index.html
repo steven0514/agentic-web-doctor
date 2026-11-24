@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Web Doctor — Open Agentic Web MVP 0.3 Auditor & Generator</title>
+  <meta name="description" content="A conforming Open Agentic Website (MVP Profile 0.3) that audits, secures, and scaffolds interoperable multi-agent websites right in your browser." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="logo-dot"></div>
+      <div>
+        <h1>Agentic Web Doctor</h1>
+        <p class="subtitle">Open Agentic Web MVP 0.3 · Conformance Auditor · Security Gate · Scaffold Generator</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="runtime-badge" class="badge badge-local">⚡ Local Runtime</span>
+      <button id="btn-self-audit" class="btn btn-primary">🩺 Run Self-Audit</button>
+      <button id="btn-byok" class="btn btn-outline">🔑 BYOK Settings</button>
+    </div>
+  </header>
+
+  <main class="grid-layout">
+    <!-- 左欄：多代理拓撲 + 工具工作台 -->
+    <section class="panel left-panel">
+      <div class="card topology-card">
+        <div class="card-head">
+          <h2>Multi-Agent Network Graph</h2>
+          <a href="./agent-manifest.json" target="_blank" class="link-chip">agent-manifest.json ↗</a>
+        </div>
+        <div class="agent-nodes">
+          <div class="agent-node" data-agent="doctor_coordinator">
+            <span class="node-role">Front Agent</span>
+            <strong>doctor_coordinator</strong>
+            <small>Triage &amp; Synthesis</small>
+          </div>
+          <div class="agent-sub-row">
+            <div class="agent-node" data-agent="manifest_auditor">
+              <span class="node-role">Specialist</span>
+              <strong>manifest_auditor</strong>
+              <small>10-Point MVP 0.3</small>
+            </div>
+            <div class="agent-node" data-agent="security_gate_inspector">
+              <span class="node-role">Specialist</span>
+              <strong>security_gate_inspector</strong>
+              <small>Trust Boundaries</small>
+            </div>
+            <div class="agent-node" data-agent="scaffold_architect">
+              <span class="node-role">Specialist</span>
+              <strong>scaffold_architect</strong>
+              <small>Bundle Generator</small>
+            </div>
+          </div>
+        </div>
+        <div id="trace-bar" class="trace-bar">Ready · WebMCP &amp; Browser Runtime initialized.</div>
+      </div>
+
+      <div class="card tabs-card">
+        <div class="tabs">
+          <button class="tab active" data-tab="auditor">🔍 Site Auditor</button>
+          <button class="tab" data-tab="scaffold">🏗️ Scaffold Generator</button>
+          <button class="tab" data-tab="artifacts">📦 Public Artifacts</button>
+        </div>
+
+        <!-- Tab 1: Auditor -->
+        <div id="tab-auditor" class="tab-content active">
+          <div class="input-row">
+            <input id="audit-url" type="url" placeholder="https://example.com (CORS-enabled agentic site) or leave blank for Self-Audit" />
+            <button id="btn-audit-url" class="btn btn-primary">Audit URL</button>
+            <button id="btn-audit-pizza" class="btn btn-outline">🍕 Official Example</button>
+          </div>
+          <details class="paste-box">
+            <summary>Or paste any <code>agent-manifest.json</code> for instant offline audit</summary>
+            <textarea id="paste-manifest" rows="5" placeholder='{"brand": "My Site", "networks": [...]}'></textarea>
+            <button id="btn-audit-paste" class="btn btn-outline" style="margin-top:6px;">🔎 Audit Pasted JSON</button>
+          </details>
+          <div id="audit-results" class="audit-results">
+            <p class="muted">Click <strong>Run Self-Audit</strong> above or enter a CORS-enabled Open Agentic Website URL to run a live 10-point MVP 0.3 &amp; Security Gate inspection.</p>
+          </div>
+        </div>
+
+        <!-- Tab 2: Scaffold Generator -->
+        <div id="tab-scaffold" class="tab-content">
+          <div class="form-grid">
+            <label>
+              <span>Site / Brand Name</span>
+              <input id="scaf-brand" type="text" value="Acme AI Docs" />
+            </label>
+            <label>
+              <span>Website Category</span>
+              <select id="scaf-type">
+                <option value="saas-docs">SaaS / Developer Docs</option>
+                <option value="ecommerce">E-Commerce Store</option>
+                <option value="opensource-project">Open Source Project</option>
+                <option value="local-service">Local Service / Booking</option>
+              </select>
+            </label>
+          </div>
+          <div class="btn-row">
+            <button id="btn-gen-scaffold" class="btn btn-primary">⚡ Generate Compliant Bundle</button>
+            <button id="btn-dl-manifest" class="btn btn-outline" disabled>⬇ agent-manifest.json</button>
+            <button id="btn-dl-network" class="btn btn-outline" disabled>⬇ network.json</button>
+          </div>
+          <pre id="scaffold-preview" class="code-preview">// Click "Generate Compliant Bundle" to preview MVP Profile 0.3 JSON...</pre>
+        </div>
+
+        <!-- Tab 3: Artifacts -->
+        <div id="tab-artifacts" class="tab-content">
+          <ul class="artifact-list">
+            <li><a href="./agent-manifest.json" target="_blank"><code>./agent-manifest.json</code></a> — Site manifest, BYOK router &amp; peer policy</li>
+            <li><a href="./agentic_web_doctor.network.json" target="_blank"><code>./agentic_web_doctor.network.json</code></a> — Portable 4-agent Neuro SAN network JSON</li>
+            <li><a href="./agent-mcp.json" target="_blank"><code>./agent-mcp.json</code></a> — Browser-local WebMCP tool descriptors</li>
+            <li><a href="./links.json" target="_blank"><code>./links.json</code></a> — Cross-site linking exports</li>
+          </ul>
+          <p class="muted">100% static HTML/CSS/JS/JSON · Zero server-side agent code · Zero credential storage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右欄：多代理互動聊天室 -->
+    <section class="panel right-panel">
+      <div class="card chat-card">
+        <div class="card-head">
+          <h2>Interactive Agent Console</h2>
+          <span class="pill">front_man: doctor_coordinator</span>
+        </div>
+        <div id="sample-queries" class="sample-queries"></div>
+        <div id="chat-log" class="chat-log"></div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="Ask doctor_coordinator to audit, inspect security, or scaffold..." autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- BYOK Modal -->
+  <div id="byok-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="card-head">
+        <h2>🔑 Bring Your Own Key (BYOK)</h2>
+        <button id="btn-close-modal" class="btn btn-outline">✕</button>
+      </div>
+      <p class="muted">Keys stay strictly inside your browser's <code>localStorage</code>. Switch to <strong>Local Deterministic</strong> mode anytime for zero-cost offline execution.</p>
+      <div class="form-stack">
+        <label>
+          <span>Execution Mode</span>
+          <select id="byok-mode">
+            <option value="local">⚡ Local Deterministic Engine (No API Key Needed)</option>
+            <option value="byok">☁️ BYOK OpenAI-Compatible Router (Otari / OpenRouter / Gemini)</option>
+          </select>
+        </label>
+        <label>
+          <span>Router Base URL</span>
+          <input id="byok-url" type="url" value="https://api.otari.ai/api/v1" />
+        </label>
+        <label>
+          <span>Model Name</span>
+          <input id="byok-model" type="text" value="google/gemini-2.5-flash" />
+        </label>
+        <label>
+          <span>API Key (Stored Locally Only)</span>
+          <input id="byok-key" type="password" placeholder="sk-... or leave blank in Local mode" />
+        </label>
+      </div>
+      <div class="btn-row">
+        <button id="btn-save-byok" class="btn btn-primary">Save Locally</button>
+        <button id="btn-clear-byok" class="btn btn-outline">Clear Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

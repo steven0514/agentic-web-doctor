@@ -1,0 +1,14 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "site": "Agentic Web Doctor",
+  "exports": [
+    {
+      "network": "agentic_web_doctor",
+      "front_man": "doctor_coordinator",
+      "manifest": "./agent-manifest.json",
+      "network_definition": "./agentic_web_doctor.network.json",
+      "description": "Cross-site Open Agentic Web conformance auditor, security gate inspector, and scaffold generator."
+    }
+  ],
+  "imports": []
+}

@@ -1,0 +1,99 @@
+{
+  "brand": "Agentic Web Doctor",
+  "spec_profile": "worldwide-agentic-web-mvp/0.3",
+  "networks": [
+    {
+      "name": "agentic_web_doctor",
+      "front_man": "doctor_coordinator",
+      "hocon": "./agentic_web_doctor.network.json",
+      "description": "Audit any website for Open Agentic Web (MVP 0.3) conformance, inspect trust boundaries & security gates, and generate ready-to-deploy static agentic site bundles.",
+      "tags": [
+        "deployed",
+        "developer-tools",
+        "conformance-auditor",
+        "security-gate",
+        "mvp-0.3"
+      ],
+      "sample_queries": [
+        "Run a full Self-Audit on this website's Open Agentic Web conformance.",
+        "Audit a site's trust boundaries, peer_policy, and BYOK security posture.",
+        "Generate a compliant agent-manifest.json and network.json scaffold for an AI SaaS documentation site.",
+        "Explain what makes a website pass Stage One of the Open Agentic Web Challenge."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1",
+    "local_deterministic_fallback": true
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "consent-required",
+    "deny_origins": [],
+    "note": "Read-only CORS inspection of user-specified peer manifests requires explicit visitor initiation; credentials are never forwarded to peer origins."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "agentic_web_doctor",
+    "front_man": "doctor_coordinator",
+    "manifest": "./agent-mcp.json",
+    "available": true,
+    "webmcp": true,
+    "reason": "Static bundle exposing deterministic browser-side WebMCP tools and portable manifest schema."
+  },
+  "theme": {
+    "primary": "#06b6d4",
+    "accent": "#8b5cf6"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "agentic_web_doctor",
+        "front_man": "doctor_coordinator",
+        "aliases": [
+          "agentic_web_doctor",
+          "doctor_coordinator",
+          "manifest_auditor",
+          "security_gate_inspector",
+          "scaffold_architect"
+        ],
+        "url": "agentic_web_doctor"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": true,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "items": [
+      {
+        "name": "audit_agentic_site",
+        "purpose": "Inspect an agent-manifest.json and linked network.json for MVP Profile 0.3 conformance.",
+        "effect": "read-only"
+      },
+      {
+        "name": "inspect_security_gate",
+        "purpose": "Evaluate peer_policy, sly_data filtering, CORS posture, and BYOK credential safety.",
+        "effect": "read-only"
+      },
+      {
+        "name": "generate_agentic_scaffold",
+        "purpose": "Generate downloadable compliant agent-manifest.json, network.json, and links.json files.",
+        "effect": "local-generate"
+      }
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "aaosa_instructions": "Use relevant downstream specialist agents when their expertise helps, then consolidate their findings into one clear, actionable answer. For Determine requests, return JSON with Name, Inquiry, Mode, Relevant (Yes or No), Strength (1 to 10), Claim (All or Partial), and Requirements (None or a list). For Fulfill or Follow up requests, return JSON with Name, Inquiry, Mode (Fulfill), and Response. Answer human developers concisely with concrete checklists and JSON snippets.",
+  "aaosa_call": {
+    "description": "Depending on the mode, routes developer inquiries across specialist compliance, security, and scaffolding agents.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "inquiry": {
+          "type": "string",
+          "description": "The developer or peer-agent inquiry"
+        },
+        "mode": {
+          "type": "string",
+          "description": "'Determine' to check relevance, 'Fulfill' to execute analysis/generation, or 'Follow up' to refine results."
+        }
+      },
+      "required": [
+        "inquiry",
+        "mode"
+      ]
+    }
+  },
+  "aaosa_command": "",
+  "metadata": {
+    "name": "Agentic Web Doctor",
+    "version": "1.0.0",
+    "spec_profile": "MVP Profile 0.3",
+    "sample_queries": [
+      "Run a full Self-Audit on this website's Open Agentic Web conformance.",
+      "Audit a site's trust boundaries, peer_policy, and BYOK security posture.",
+      "Generate a compliant agent-manifest.json and network.json scaffold for an AI SaaS documentation site.",
+      "Explain what makes a website pass Stage One of the Open Agentic Web Challenge."
+    ],
+    "date_created": "2026-11-24T01:40:00+08:00"
+  },
+  "llm_config": {
+    "model_name": "google/gemini-2.5-flash"
+  },
+  "max_execution_seconds": 120,
+  "instructions_prefix": "You are part of Agentic Web Doctor, an Open Agentic Web (MVP Profile 0.3) diagnostic and developer-enablement network. Never exfiltrate user API keys or sly_data. Always ground audit findings in observable manifest and network JSON fields.",
+  "tools": [
+    {
+      "name": "doctor_coordinator",
+      "function": {
+        "description": "Front agent coordinating Open Agentic Web conformance audits, trust-boundary security inspections, and compliant site scaffolding.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "User or peer-agent request."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Execution mode: Determine, Fulfill, or Follow up."
+            }
+          },
+          "required": [
+            "inquiry",
+            "mode"
+          ]
+        }
+      },
+      "instructions": "Triage incoming requests and delegate to manifest_auditor (for MVP 0.3 compliance & scoring), security_gate_inspector (for peer_policy, sly_data, BYOK & prompt-injection checks), and scaffold_architect (for generating ready-to-deploy Open Agentic Web JSON bundles). Synthesize specialist outputs into a crisp developer report.",
+      "tools": [
+        "manifest_auditor",
+        "security_gate_inspector",
+        "scaffold_architect"
+      ]
+    },
+    {
+      "name": "manifest_auditor",
+      "function": {
+        "description": "Audits agent-manifest.json, resolved network.json, agent-mcp.json, and links.json against Cognizant Open Agentic Web MVP Profile 0.3.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "Target URL, JSON snippet, or conformance question."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Determine, Fulfill, or Follow up."
+            }
+          },
+          "required": [
+            "inquiry",
+            "mode"
+          ]
+        }
+      },
+      "instructions": "Evaluate conformance across 10 deterministic checks: brand metadata, networks[] with front_man and hocon reference, valid Neuro SAN tools[] graph, llm_router & BYOK support, peer_policy, linking exports, deployment static/runtime metadata, sample_queries, actions declaration, and MCP/WebMCP discovery. Return a 0-100 score with pass/fail itemization.",
+      "tools": []
+    },
+    {
+      "name": "security_gate_inspector",
+      "function": {
+        "description": "Inspects trust boundaries, peer_policy, allowed_peers, sly_data leakage risks, and BYOK credential isolation.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "Manifest/network JSON or security posture question."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Determine, Fulfill, or Follow up."
+            }
+          },
+          "required": [
+            "inquiry",
+            "mode"
+          ]
+        }
+      },
+      "instructions": "Check for high-risk misconfigurations: open wildcard allowed_peers without consent, hardcoded API keys or tokens in JSON/JS, missing max_execution_seconds bounds, unsafe cross-origin actions, and prompt-injection surfaces in untrusted peer instructions. Classify findings as PASS, WARN, or FAIL.",
+      "tools": []
+    },
+    {
+      "name": "scaffold_architect",
+      "function": {
+        "description": "Generates portable, static-host-ready Open Agentic Web MVP 0.3 bundles (agent-manifest.json, network.json, links.json) for any website domain.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "Description of the target website (e.g., e-commerce store, SaaS docs, clinic, open-source project)."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Determine, Fulfill, or Follow up."
+            }
+          },
+          "required": [
+            "inquiry",
+            "mode"
+          ]
+        }
+      },
+      "instructions": "Produce clean, strictly valid MVP Profile 0.3 JSON files with sensible front_man + 2-3 specialist sub-agents, safe closed/consent-required peer_policy defaults, BYOK router settings, and sample queries tailored to the user's domain.",
+      "tools": []
+    }
+  ]
+}
